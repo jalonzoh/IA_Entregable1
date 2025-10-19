@@ -65,10 +65,34 @@ def opcion_3():
     #input("\nPresiona Enter para continuar...")
 
 def opcion_4():
+    import subprocess
+    import os
+
     print("\n--- Diagrama de Flujo ---")
-    #config = input("Ingresa el nuevo valor de configuración: ")
-    #print(f"Configuración actualizada a: {config}")
-    #input("\nPresiona Enter para continuar...")
+    # Intentar abrir el PNG generado
+    ruta_png = os.path.join(os.path.dirname(__file__), "diagrama.png")
+    ruta_mmd = os.path.join(os.path.dirname(__file__), "diagrama_clean.mmd")
+
+    try:
+        if os.path.exists(ruta_png):
+            print(f"Abriendo diagrama: {ruta_png}")
+            # En entornos Linux, xdg-open abre el archivo con la aplicación por defecto
+            subprocess.run(["xdg-open", ruta_png], check=False)
+        elif os.path.exists(ruta_mmd):
+            print("No se encontró PNG. Puedes visualizar el archivo .mmd con un renderizador Mermaid (ej: https://mermaid.live)")
+            print(f"Ruta del archivo .mmd: {ruta_mmd}")
+            # Intentar abrir el .mmd en el navegador por defecto del host si está configurado
+            browser_cmd = os.environ.get("BROWSER")
+            if browser_cmd:
+                try:
+                    subprocess.run([browser_cmd, f"file://{ruta_mmd}"], check=False)
+                except Exception:
+                    pass
+        else:
+            print("No se encontró ningún diagrama en el proyecto. Genera 'diagrama.png' o 'diagrama_clean.mmd' primero.")
+
+    except Exception as e:
+        print(f"Error al intentar abrir el diagrama: {e}")
 
 def opcion_5():
     print("\n--- Sugerencias por COPILOT ---")
