@@ -1,6 +1,8 @@
 # IA_Entregable1
 Entregable 1 - Guayerd IA
 
+Para instrucciones detalladas sobre ejecución y regeneración de diagramas, ver `instrucciones.md`.
+
 # Tema General: 
 ## Optimización de Estrategias de Ventas y Fidelización de Clientes
 Este tema abarca cómo mejorar la forma en que vendes y cómo retienes a tus clientes, lo cual es fundamental para cualquier negocio.
