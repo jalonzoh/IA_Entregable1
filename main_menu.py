@@ -56,7 +56,8 @@ def opcion_1():
 
 def opcion_2():
     print("\n--- Informacion de los Dataset ---")
-    extraer_e_imprimir_lineas("/workspaces/IA_Entregable1/README.md", rango_lineas=(17, 137))    
+    # Mostrar un rango más compacto (líneas 17 a 40) para opción 2
+    extraer_e_imprimir_lineas("/workspaces/IA_Entregable1/README.md", rango_lineas=(17, 40))    
 
 def opcion_3():
     print("\n--- Pseudocodigo ---")
