@@ -1,0 +1,40 @@
+flowchart TD
+  A[Inicio] --> B[Mostrar menú]
+  B --> C{Usuario ingresa opción}
+  C -->|1| O1[opcion_1]
+  C -->|2| O2[opcion_2]
+  C -->|3| O3[opcion_3]
+  C -->|4| O4[opcion_4]
+  C -->|5| O5[opcion_5]
+  C -->|6| O6[opcion_6]
+  C -->|7| O7[opcion_7]
+  C -->|8| SALIR[SALIR]
+  C -->|otra| INVALID[Opción no válida]
+
+  O1 --> L1[Imprime título: Tema / Problema / Solucion]
+  L1 --> R1[llama extraer_e_imprimir_lineas (rango 2-13)]
+  R1 --> PAUSE1[Retorna al menú]
+
+  O2 --> L2[Imprime título: Informacion de los Dataset]
+  L2 --> R2[llama extraer_e_imprimir_lineas (rango 17-137)]
+  R2 --> PAUSE2[Retorna al menú]
+
+  O3 --> L3[Imprime título: Pseudocodigo]
+  L3 --> PAUSE3[Retorna al menú]
+
+  O4 --> L4[Imprime título: Diagrama de Flujo]
+  L4 --> PAUSE4[Retorna al menú]
+
+  O5 --> L5[Imprime título: Sugerencias por COPILOT]
+  L5 --> PAUSE5[Retorna al menú]
+
+  O6 --> L6[Imprime título: Programa]
+  L6 --> PAUSE6[Retorna al menú]
+
+  O7 --> L7[Imprime título: Instrucciones]
+  L7 --> PAUSE7[Retorna al menú]
+
+  INVALID --> MSG[Imprime "Opción no válida" y pausa]
+  MSG --> PAUSE_INVALID[Retorna al menú]
+
+  SALIR --> END[Fin del programa]
