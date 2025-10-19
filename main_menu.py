@@ -124,6 +124,7 @@ def mostrar_menu():
     print("5. Sugerencias por Copilot")
     print("6. Mostrar Programa")
     print("7. Mostrar Instrucciones")
+    print("9. Regenerar diagrama (PNG & SVG)")
     print("8. Salir")
     print("="*30)
 
@@ -147,6 +148,23 @@ def main():
             opcion_6()
         elif eleccion == '7':
             opcion_7()
+        elif eleccion == '9':
+            # Intentar regenerar diagrama usando npx mmdc si está disponible
+            import subprocess, os
+            ruta_mmd = os.path.join(os.path.dirname(__file__), "diagrama_clean.mmd")
+            if not os.path.exists(ruta_mmd):
+                print("No se encontró 'diagrama_clean.mmd'. Asegúrate de tener el archivo .mmd en el directorio del proyecto.")
+                continue
+            try:
+                print("Regenerando diagrama (PNG)...")
+                subprocess.run(["npx", "mmdc", "-i", ruta_mmd, "-o", os.path.join(os.path.dirname(__file__), "diagrama.png")], check=False)
+                print("Regenerando diagrama (SVG)...")
+                subprocess.run(["npx", "mmdc", "-i", ruta_mmd, "-o", os.path.join(os.path.dirname(__file__), "diagrama.svg")], check=False)
+                print("Regeneración completada. Revisa 'diagrama.png' y 'diagrama.svg'.")
+            except FileNotFoundError:
+                print("npx no está disponible. Instala Node.js y @mermaid-js/mermaid-cli para usar esta opción.")
+            except Exception as e:
+                print(f"Error al regenerar el diagrama: {e}")
         elif eleccion == '8':
             print("\nSaliendo del programa. ¡Hasta luego!")
             break # Sale del bucle while y termina el programa
