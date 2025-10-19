@@ -77,7 +77,8 @@ def opcion_4():
 
     try:
         if os.path.exists(ruta_png):
-            print(f"Abriendo diagrama: {ruta_png}")
+            nombre = os.path.basename(ruta_png)
+            print(f"Abriendo diagrama: {nombre}")
             # En entornos Linux, xdg-open abre el archivo con la aplicación por defecto
             subprocess.run(["xdg-open", ruta_png], check=False)
         elif os.path.exists(ruta_mmd):
@@ -87,6 +88,7 @@ def opcion_4():
             browser_cmd = os.environ.get("BROWSER")
             if browser_cmd:
                 try:
+                    print(f"Abriendo en navegador: {browser_cmd} -> {os.path.basename(ruta_mmd)}")
                     subprocess.run([browser_cmd, f"file://{ruta_mmd}"], check=False)
                 except Exception:
                     pass
