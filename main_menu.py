@@ -69,8 +69,10 @@ def opcion_4():
     import os
 
     print("\n--- Diagrama de Flujo ---")
-    # Intentar abrir el PNG generado
-    ruta_png = os.path.join(os.path.dirname(__file__), "diagrama.png")
+    # Intentar abrir el PNG generado (prioriza pseudocodigo_diagrama.png)
+    ruta_png = os.path.join(os.path.dirname(__file__), "pseudocodigo_diagrama.png")
+    if not os.path.exists(ruta_png):
+        ruta_png = os.path.join(os.path.dirname(__file__), "diagrama.png")
     ruta_mmd = os.path.join(os.path.dirname(__file__), "diagrama_clean.mmd")
 
     try:
