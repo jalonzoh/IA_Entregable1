@@ -149,22 +149,52 @@ def main():
         elif eleccion == '7':
             opcion_7()
         elif eleccion == '9':
-            # Intentar regenerar diagrama usando npx mmdc si está disponible
+            # Submenú para regenerar PNG, SVG, ambos o volver
             import subprocess, os
             ruta_mmd = os.path.join(os.path.dirname(__file__), "diagrama_clean.mmd")
+            ruta_png = os.path.join(os.path.dirname(__file__), "diagrama.png")
+            ruta_svg = os.path.join(os.path.dirname(__file__), "diagrama.svg")
+
             if not os.path.exists(ruta_mmd):
                 print("No se encontró 'diagrama_clean.mmd'. Asegúrate de tener el archivo .mmd en el directorio del proyecto.")
                 continue
-            try:
-                print("Regenerando diagrama (PNG)...")
-                subprocess.run(["npx", "mmdc", "-i", ruta_mmd, "-o", os.path.join(os.path.dirname(__file__), "diagrama.png")], check=False)
-                print("Regenerando diagrama (SVG)...")
-                subprocess.run(["npx", "mmdc", "-i", ruta_mmd, "-o", os.path.join(os.path.dirname(__file__), "diagrama.svg")], check=False)
-                print("Regeneración completada. Revisa 'diagrama.png' y 'diagrama.svg'.")
-            except FileNotFoundError:
-                print("npx no está disponible. Instala Node.js y @mermaid-js/mermaid-cli para usar esta opción.")
-            except Exception as e:
-                print(f"Error al regenerar el diagrama: {e}")
+
+            while True:
+                print("\n--- Regenerar diagrama ---")
+                print("1. Regenerar solo PNG")
+                print("2. Regenerar solo SVG")
+                print("3. Regenerar ambos (PNG + SVG)")
+                print("4. Volver al menú principal")
+                sub = input("Selecciona una opción (1-4): ")
+
+                try:
+                    if sub == '1':
+                        print("Regenerando PNG...")
+                        subprocess.run(["npx", "mmdc", "-i", ruta_mmd, "-o", ruta_png], check=False)
+                        print("PNG generado:", ruta_png)
+                        break
+                    elif sub == '2':
+                        print("Regenerando SVG...")
+                        subprocess.run(["npx", "mmdc", "-i", ruta_mmd, "-o", ruta_svg], check=False)
+                        print("SVG generado:", ruta_svg)
+                        break
+                    elif sub == '3':
+                        print("Regenerando PNG y SVG...")
+                        subprocess.run(["npx", "mmdc", "-i", ruta_mmd, "-o", ruta_png], check=False)
+                        subprocess.run(["npx", "mmdc", "-i", ruta_mmd, "-o", ruta_svg], check=False)
+                        print("Ambos archivos generados:", ruta_png, ruta_svg)
+                        break
+                    elif sub == '4':
+                        break
+                    else:
+                        print("Opción no válida en el submenú. Intenta de nuevo.")
+
+                except FileNotFoundError:
+                    print("npx no está disponible. Instala Node.js y @mermaid-js/mermaid-cli para usar esta opción.")
+                    break
+                except Exception as e:
+                    print(f"Error al regenerar el diagrama: {e}")
+                    break
         elif eleccion == '8':
             print("\nSaliendo del programa. ¡Hasta luego!")
             break # Sale del bucle while y termina el programa
